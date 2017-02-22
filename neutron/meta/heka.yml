@@ -28,7 +28,10 @@ log_collector:
     neutron_log:
       engine: logstreamer
       log_directory: "/var/log"
-      file_match: 'neutron/(?P<Service>(dhcp-agent|l3-agent|metadata-agent|neutron-netns-cleanup|openvswitch-agent|neutron-lbaas-agent|server))\.log\.?(?P<Seq>\d*)$'
+      # Depending on the package version, the Neutron server logs are either at
+      # /var/log/neutron/neutron-server.log or /var/log/neutron/server.log and
+      # the following regexp will deal with both situations.
+      file_match: 'neutron/(neutron-)?(?P<Service>(dhcp-agent|l3-agent|metadata-agent|neutron-netns-cleanup|openvswitch-agent|neutron-lbaas-agent|server))\.log\.?(?P<Seq>\d*)$'
       differentiator: ['neutron', '_', 'Service']
       priority: ["^Seq"]
       decoder: "neutron_decoder"
