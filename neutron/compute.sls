@@ -12,6 +12,35 @@ neutron_compute_packages:
   - require:
     - pkg: neutron_compute_packages
 
+{% if compute.backend.sriov is defined %}
+
+neutron_sriov_package:
+  pkg.installed:
+  - name: neutron-sriov-agent
+
+/etc/neutron/plugins/ml2/sriov_agent.ini:
+  file.managed:
+  - source: salt://neutron/files/{{ compute.version }}/sriov_agent.ini
+  - template: jinja
+  - watch_in:
+    - service: neutron_compute_services
+  - require:
+    - pkg: neutron_compute_packages
+    - pkg: neutron_sriov_package
+
+neutron_sriov_service:
+  service.running:
+  - name: neutron-sriov-agent
+  - enable: true
+  - watch_in:
+    - service: neutron_compute_services
+  - watch:
+    - file: /etc/neutron/neutron.conf
+    - file: /etc/neutron/plugins/ml2/openvswitch_agent.ini
+    - file: /etc/neutron/plugins/ml2/sriov_agent.ini
+
+{% endif %}
+
 {% if compute.dvr %}
 
 neutron_dvr_packages:

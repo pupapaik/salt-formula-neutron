@@ -535,6 +535,40 @@ Compute node
             ovs:
               driver: openvswitch
 
+Neutron OVS SR-IOV
+==================
+
+.. code-block:: yaml
+
+    neutron:
+      server:
+        version: mitaka
+        plugin: ml2
+        backend:
+          engine: ml2
+          ...
+          mechanism:
+            ovs:
+              driver: openvswitch
+            sriov:
+              driver: sriovnicswitch
+
+    neutron:
+      compute:
+        version: mitaka
+        plugin: ml2
+        ...
+        backend:
+          engine: ml2
+          tenant_network_types: "flat,vlan" # Can be mixed flat,vlan,vxlan
+          sriov:
+            nic_one:
+              devname: eth1
+              physical_network: physnet3
+          mechanism:
+            ovs:
+              driver: openvswitch
+
 Neutron Server with OpenContrail
 ==================================
 
