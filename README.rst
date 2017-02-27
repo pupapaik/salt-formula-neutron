@@ -535,6 +535,32 @@ Compute node
             ovs:
               driver: openvswitch
 
+Neutron OVS DPDK
+==================
+
+Enable datapath netdev for neutron openvswitch agent
+
+.. code-block:: yaml
+
+    neutron:
+      server:
+        version: mitaka
+        ...
+        dpdk: True
+        ...
+
+    neutron:
+      compute:
+        version: mitaka
+        plugin: ml2
+        dpdk: True
+        backend:
+          engine: ml2
+          ...
+          mechanism:
+            ovs:
+              driver: openvswitch
+
 Neutron OVS SR-IOV
 ==================
 
