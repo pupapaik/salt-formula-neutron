@@ -86,8 +86,11 @@ def network_present(name=None,
         tenant_id = None
         LOG.debug('Cannot get the tenant id. User {0} is not an admin.'.format(
             connection_args['connection_user']))
-    existing_network = _neutron_module_call(
-        'list_networks', name=name, **connection_args)
+    existing_networks = _neutron_module_call(
+        'list_networks', **connection_args)
+    for network in existing_networks:
+        if network.get(name) == name:
+            existing_network = network
     network_arguments = _get_non_null_args(
         name=name,
         provider_network_type=provider_network_type,
@@ -101,8 +104,11 @@ def network_present(name=None,
     if not existing_network:
         network_arguments.update(connection_args)
         _neutron_module_call('create_network', **network_arguments)
-        existing_network = _neutron_module_call(
-            'list_networks', name=name, **connection_args)
+        existing_networks = _neutron_module_call(
+            'list_networks', **connection_args)
+        for network in existing_networks:
+            if network.get(name) == name:
+                existing_network = network
         if existing_network:
             return _created(name, 'network', existing_network[name])
         return _update_failed(name, 'network')
