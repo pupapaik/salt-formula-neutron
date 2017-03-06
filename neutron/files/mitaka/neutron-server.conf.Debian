@@ -1054,7 +1054,7 @@ region_name = {{ server.compute.region }}
 # keystone catalog and should be one of public, internal or admin. (string
 # value)
 # Allowed values: public, admin, internal
-#endpoint_type = public
+endpoint_type = {{ server.identity.get('endpoint_type', 'public') }}
 
 #
 # From nova.auth

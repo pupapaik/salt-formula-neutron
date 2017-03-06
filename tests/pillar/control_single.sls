@@ -32,6 +32,7 @@ neutron:
       user: neutron
       password: password
       tenant: service
+      endpoint_type: internal
     message_queue:
       engine: rabbitmq
       host: 127.0.0.1

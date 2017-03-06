@@ -3,6 +3,8 @@ applications:
 classes:
 - service.neutron.support
 parameters:
+  _param:
+    keystone_neutron_endpoint_type: internal
   neutron:
     server:
       enabled: true
@@ -29,6 +31,7 @@ parameters:
         user: neutron
         password: ${_param:keystone_neutron_password}
         tenant: service
+        endpoint_type: ${_param:keystone_neutron_endpoint_type}
       message_queue:
         engine: rabbitmq
         host: ${_param:single_address}

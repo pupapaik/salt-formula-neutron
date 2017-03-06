@@ -40,6 +40,7 @@ Neutron Server on the controller node
           user: neutron
           password: pwd
           tenant: service
+          endpoint_type: internal
         message_queue:
           engine: rabbitmq
           host: 127.0.0.1
@@ -127,6 +128,7 @@ Neutron Server only
           user: neutron
           password: pwd
           tenant: service
+          endpoint_type: internal
         message_queue:
           engine: rabbitmq
           host: 127.0.0.1
@@ -238,6 +240,7 @@ Neutron Server only
           user: neutron
           password: pwd
           tenant: service
+          endpoint_type: internal
         message_queue:
           engine: rabbitmq
           host: 127.0.0.1
@@ -346,6 +349,7 @@ Neutron Server only
           user: neutron
           password: pwd
           tenant: service
+          endpoint_type: internal
         message_queue:
           engine: rabbitmq
           host: 127.0.0.1

@@ -35,6 +35,7 @@ neutron:
       region: RegionOne
       tenant: service
       user: neutron
+      endpoint_type: internal
     l3_ha: True
     message_queue:
       engine: rabbitmq
