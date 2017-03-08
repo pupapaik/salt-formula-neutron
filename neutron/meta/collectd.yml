@@ -15,6 +15,7 @@ remote_plugin:
     username: {{ server.identity.user }}
     password: {{ server.identity.password }}
     tenant: {{ server.identity.tenant }}
+    region: {{ server.identity.region }}
   openstack_neutron_agents:
     plugin: python
     template: neutron/files/collectd_openstack_neutron_agents.conf
@@ -22,5 +23,6 @@ remote_plugin:
     username: {{ server.identity.user }}
     password: {{ server.identity.password }}
     tenant: {{ server.identity.tenant }}
+    region: {{ server.identity.region }}
 {%- endif %}
 {%- endif %}
